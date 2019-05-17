@@ -17,6 +17,7 @@ class RandomWordsState extends State<RandomWords> {
         ),
       );
     }
+    
     Widget _buildSuggestions() {
       return ListView.builder(
           padding: const EdgeInsets.all(16.0),

@@ -46,6 +46,7 @@ flutter:
     - lib/images/igor_icon.png
     - lib/images/botao_facebook.png
     - lib/images/botao_google.png
+    - lib/images/botao_entrar.png
   fonts:
     - family: Fira Sans
       fonts:

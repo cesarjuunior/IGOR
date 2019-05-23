@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:igor/pages/login.page.dart';
 
 void main() => runApp(MyApp());
 
@@ -6,72 +7,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Welcome to Flutter',
-      home: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("lib/images/background.png"),
-                fit: BoxFit.cover)),
-        child: Scaffold(
-          resizeToAvoidBottomPadding: false,
-          backgroundColor: Colors.transparent,
-          body: Padding(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Divider(height: 70, color: Colors.transparent),
-                    Image.asset(
-                      'lib/images/igor_icon.png',
-                      width: 200,
-                      height: 60,
-                      fit: BoxFit.fill,
-                    ),
-                    Divider(),
-                    Image.asset(
-                      'lib/images/botao_google.png',
-                      width: 220,
-                      height: 50,
-                      fit: BoxFit.fill,
-                    ),
-                    Divider(height: 5, color: Colors.transparent),
-                    Image.asset(
-                      'lib/images/botao_facebook.png',
-                      width: 220,
-                      height: 50,
-                      fit: BoxFit.fill,
-                    ),
-                    Divider(height: 20, color: Colors.transparent),
-                    Text(
-                      'OU',
-                      style: TextStyle(
-                          fontFamily: 'Fira Sans',
-                          color: Colors.white,
-                          fontSize: 20),
-                    ),
-                    Column(children: <Widget>[
-                      TextFormField(
-                        autofocus: true,
-                        keyboardType: TextInputType.text,
-                        style: new TextStyle(color: Colors.white, fontSize: 15),
-                        decoration: InputDecoration(
-                            labelText: "E-mail",
-                            labelStyle: TextStyle(color: Colors.white)),
-                      ),
-                      Divider(),
-                      TextFormField(
-                        autofocus: true,
-                        obscureText: true,
-                        keyboardType: TextInputType.text,
-                        style: new TextStyle(color: Colors.white, fontSize: 15),
-                        decoration: InputDecoration(
-                            labelText: "Senha",
-                            labelStyle: TextStyle(color: Colors.white)),
-                      ),
-                    ]),
-                  ])),
-        ),
-      ),
+       title: 'IGOR',
+       home: LoginPage(),
     );
   }
 }

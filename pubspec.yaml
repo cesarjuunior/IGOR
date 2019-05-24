@@ -47,6 +47,18 @@ flutter:
     - lib/images/botao_facebook.png
     - lib/images/botao_google.png
     - lib/images/botao_entrar.png
+    - lib/images/botao_criar.png
+    - lib/images/aventuras-icone.png
+    - lib/images/configuracoes-icone.png
+    - lib/images/conta-icone.png
+    - lib/images/livros-icone.png
+    - lib/images/notificacoes-icone.png
+    - lib/images/barra_navegacao.png
+    - lib/images/nova_aventura.png
+    - lib/images/botao_pronto.png
+    - lib/images/fundo_nova_aventura.png
+    - lib/images/botao_fechar.png
+
   fonts:
     - family: Fira Sans
       fonts:

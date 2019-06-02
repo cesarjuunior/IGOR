@@ -58,6 +58,12 @@ flutter:
     - lib/images/botao_pronto.png
     - lib/images/fundo_nova_aventura.png
     - lib/images/botao_fechar.png
+    - lib/images/Goku.jpg
+    - lib/images/Gretchen.jpg
+    - lib/images/Pikachu.png
+    - lib/images/Ronaldinho.png
+    - lib/images/Rusbe.jpg
+    - lib/images/Thanos.jpg
 
   fonts:
     - family: Fira Sans

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:igor/pages/criar.aventura.dart';
+import 'package:igor/pages/Infos.dart';
 
 import 'cadastro.pessoa.dart';
 
@@ -69,7 +70,12 @@ class _homePageState extends State<homePage> {
                   title: Text('Livros',
                     style: TextStyle(color: Colors.yellow, fontFamily: 'Fira Sans',),
                   ),
-                  onLongPress: (){
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => InfosPage()),
+                    );
                   },
                 ),
                 ListTile(

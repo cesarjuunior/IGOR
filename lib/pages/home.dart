@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:igor/objetos/notice.dart';
 import 'package:igor/pages/criar.aventura.dart';
+import 'package:igor/repository/newsApi.dart';
 
 import 'cadastro.pessoa.dart';
 
-class homePage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _homePageState createState() => _homePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _homePageState extends State<homePage> {
+class _HomePageState extends State<HomePage> {
+
+  List _news = new List();
+  var repository = new NewsApi();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Color(0xff221233),
         title: Image.asset(
           'lib/images/barra_navegacao.png',
           width: 100,
@@ -39,7 +45,7 @@ class _homePageState extends State<homePage> {
       ),
       drawer: Drawer(
           child: Scaffold(
-            backgroundColor: Colors.deepPurpleAccent,
+            backgroundColor: Color(0xff221233),
             body: ListView(
               children: <Widget>[
                 ListTile(
@@ -131,7 +137,58 @@ class _homePageState extends State<homePage> {
         ),
         backgroundColor: Colors.transparent,
       ),
+      body: Container(
+        decoration: BoxDecoration(
+            color: Color(0xff221233),
+        ),
+        child: _getListViewWidget(),
+      ),
     );
+  }
+
+  @override
+  void initState() {
+
+    loadNotices();
+
+  }
+
+  loadNotices() async{
+
+    List result = await repository.loadNews();
+
+    setState(() {
+
+      result.forEach((item) {
+
+        var notice = new Notice(
+            item['url_img'],
+            item['tittle'],
+            item['date'],
+            item['description']
+        );
+
+
+        _news.add(notice);
+
+      });
+
+    });
+
+  }
+
+
+
+   _getListViewWidget(){
+     var list = new ListView.builder(
+         itemCount: _news.length,
+         padding: new EdgeInsets.only(top: 5.0),
+         itemBuilder: (context, index){
+           return _news[index];
+         }
+     );
+
+     return list;
   }
 
   void _select(Choice choice) {

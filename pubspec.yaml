@@ -19,6 +19,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core: ^0.2.5  # add dependency for Firebase Core
+  cloud_firestore: ^0.8.2     # new
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -58,6 +61,11 @@ flutter:
     - lib/images/botao_pronto.png
     - lib/images/fundo_nova_aventura.png
     - lib/images/botao_fechar.png
+    - lib/images/miniatura_coast.png
+    - lib/images/miniatura_corvali.png
+    - lib/images/miniatura_heartlands.png
+    - lib/images/miniatura_imagem_automática.png
+    - lib/images/miniatura_krevast.png
 
   fonts:
     - family: Fira Sans

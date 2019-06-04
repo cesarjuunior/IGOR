@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "941637691667",
+    "firebase_url": "https://igor-c4467.firebaseio.com",
+    "project_id": "igor-c4467",
+    "storage_bucket": "igor-c4467.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941637691667:android:38d60b13cb34a638",
+        "android_client_info": {
+          "package_name": "com.example.igor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "941637691667-1i9g16cd58vv0hdr1jl3cbpvkh6jq45b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJO_FheVAs6Jqpz5D_4T6QciEwp98QW_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "941637691667-1i9g16cd58vv0hdr1jl3cbpvkh6jq45b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

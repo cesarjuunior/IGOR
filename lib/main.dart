@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:igor/pages/home.dart';
 import 'package:igor/pages/login.page.dart';
 
 void main() => runApp(MyApp());

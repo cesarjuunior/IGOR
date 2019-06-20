@@ -11,6 +11,7 @@ class homePage extends StatefulWidget {
 
 class _homePageState extends State<homePage> {
   @override
+  bool visBotoesPer = false;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -74,7 +75,7 @@ class _homePageState extends State<homePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => InfosPage()),
+                          builder: (context) => InfosPage(visBotoesPer)),
                     );
                   },
                 ),

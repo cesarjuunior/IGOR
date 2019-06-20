@@ -2,11 +2,18 @@ import 'package:flutter/material.dart';
 
 class ThanosPage extends StatefulWidget {
   @override
-  _ThanosPageState createState() => _ThanosPageState();
+
+  bool vis;
+  ThanosPage(this.vis);
+
+  _ThanosPageState createState() => _ThanosPageState(this.vis);
 }
 
 class _ThanosPageState extends State<ThanosPage> {
   @override
+  bool a;
+  _ThanosPageState(this.a);
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: Builder(
@@ -24,45 +31,48 @@ class _ThanosPageState extends State<ThanosPage> {
                       _imgPer(),
                       _body(),
                       //Divider(height: 40, color: Colors.transparent),
-                      Padding(
-                        padding: EdgeInsets.only(top: 20, bottom: 0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            RaisedButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
+                      Visibility(
+                        visible: a,
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 20, bottom: 0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                color: Color(0xff221233),
+                                child: Text(
+                                  "Rejeitar",
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.white),
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
                               ),
-                              color: Color(0xff221233),
-                              child: Text(
-                                "Rejeitar",
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.white),
+                              RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                color: Color(0xff221233),
+                                child: Text(
+                                  "Aceitar",
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.white),
+                                ),
+                                onPressed: () {
+                                  Scaffold.of(context).showSnackBar(
+                                      new SnackBar(
+                                          content: new Text(
+                                              'Aceitou o personagem')));
+                                },
                               ),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                            ),
-                            RaisedButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              color: Color(0xff221233),
-                              child: Text(
-                                "Aceitar",
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.white),
-                              ),
-                              onPressed: () {
-                                Scaffold.of(context).showSnackBar(
-                                    new SnackBar(
-                                        content: new Text(
-                                            'Aceitou o personagem')));
-                              },
-                            ),
-                          ], // row children
-                        ), // row
-                      ), // Padding
+                            ], // row children
+                          ), // row
+                        ), // Padding,
+                      )
                     ], // column children
                   ) // Column
               ), //container

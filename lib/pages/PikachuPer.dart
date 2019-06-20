@@ -2,11 +2,19 @@ import 'package:flutter/material.dart';
 
 class PikachuPage extends StatefulWidget {
   @override
-  _PikachuPageState createState() => _PikachuPageState();
+
+  bool vis;
+  PikachuPage(this.vis);
+
+  _PikachuPageState createState() => _PikachuPageState(this.vis);
 }
 
 class _PikachuPageState extends State<PikachuPage> {
   @override
+
+  bool a;
+  _PikachuPageState(this.a);
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: Builder(
@@ -24,45 +32,48 @@ class _PikachuPageState extends State<PikachuPage> {
                     _imgPer(),
                     _body(),
                     //Divider(height: 40, color: Colors.transparent),
-                    Padding(
-                      padding: EdgeInsets.only(top: 20, bottom: 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          RaisedButton(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
+                    Visibility(
+                      visible: a,
+                      child:  Padding(
+                        padding: EdgeInsets.only(top: 20, bottom: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              color: Color(0xff221233),
+                              child: Text(
+                                "Rejeitar",
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.white),
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
                             ),
-                            color: Color(0xff221233),
-                            child: Text(
-                              "Rejeitar",
-                              style: TextStyle(
-                                  fontSize: 16, color: Colors.white),
+                            RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              color: Color(0xff221233),
+                              child: Text(
+                                "Aceitar",
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.white),
+                              ),
+                              onPressed: () {
+                                Scaffold.of(context).showSnackBar(
+                                    new SnackBar(
+                                        content: new Text(
+                                            'Aceitou o personagem')));
+                              },
                             ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                          RaisedButton(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            color: Color(0xff221233),
-                            child: Text(
-                              "Aceitar",
-                              style: TextStyle(
-                                  fontSize: 16, color: Colors.white),
-                            ),
-                            onPressed: () {
-                              Scaffold.of(context).showSnackBar(
-                                  new SnackBar(
-                                      content: new Text(
-                                          'Aceitou o personagem')));
-                            },
-                          ),
-                        ], // row children
-                      ), // row
-                    ), // Padding
+                          ], // row children
+                        ), // row
+                      ), // Padding,
+                    ),
                   ], // column children
                 ) // Column
             ), //container

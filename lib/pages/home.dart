@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:igor/pages/criar.aventura.dart';
 import 'package:igor/pages/Infos.dart';
+import 'package:igor/pages/dice.dart';
 
 import 'cadastro.pessoa.dart';
 
@@ -124,6 +125,24 @@ class _homePageState extends State<homePage> {
               ],
             ),
           ),
+      ),
+      body: Center(
+        child: Stack(
+          children: <Widget>[
+            RaisedButton(
+              shape: BeveledRectangleBorder(),
+              color: Colors.amberAccent,
+              child: Text("Rolar Dado"),
+              onPressed:() {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => dice()),
+                );
+              },
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

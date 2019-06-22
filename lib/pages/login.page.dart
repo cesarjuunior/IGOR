@@ -182,7 +182,7 @@ class _botaoEntrar extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => homePage()
+                builder: (context) => HomePage()
             ),
           )
       );

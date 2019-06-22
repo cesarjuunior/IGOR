@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:igor/pages/home.dart';
+import 'package:igor/repository/aventurafirebaseFirestoreService.dart';
 
 class criarAventura extends StatefulWidget {
   @override
@@ -7,12 +8,25 @@ class criarAventura extends StatefulWidget {
 }
 
 class _criarAventuraState extends State<criarAventura> {
+
+  TextEditingController _descricaoAventura;
+
+  AventuraFirebaseFirestoreService db = new AventuraFirebaseFirestoreService();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _descricaoAventura = new TextEditingController();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Color(0xff221233),
         title: Image.asset(
           'lib/images/barra_navegacao.png',
           width: 100,
@@ -30,7 +44,7 @@ class _criarAventuraState extends State<criarAventura> {
       ),
       drawer: Drawer(
         child: Scaffold(
-          backgroundColor: Colors.deepPurpleAccent,
+          backgroundColor: Color(0xff221233),
           body: ListView(
             children: <Widget>[
               ListTile(
@@ -147,6 +161,7 @@ class _criarAventuraState extends State<criarAventura> {
                         children: <Widget>[_botaoFechar()],
                       ),
                       TextFormField(
+                        controller: _descricaoAventura,
                         keyboardType: TextInputType.text,
                         style: TextStyle(color: Colors.black, fontSize: 15),
                         decoration: InputDecoration(
@@ -156,7 +171,22 @@ class _criarAventuraState extends State<criarAventura> {
                       Divider(height: 10, color: Colors.transparent),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[_botaoPronto()],
+                        children: <Widget>[
+                          GestureDetector(
+                              child: Container(
+                                  width: 80,
+                                  height: 20,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            "lib/images/botao_criar.png"),
+                                        fit: BoxFit.cover
+                                    ),
+                                  )
+                              ), onTap: () => db.inserirAventura(_descricaoAventura.text)
+                          )
+                        ],
                       ),
                       Divider(height: 500, color: Colors.transparent),
                     ],
@@ -215,7 +245,7 @@ class _botaoFechar extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => homePage()),
+                builder: (context) => HomePage()),
           );
         });
   }

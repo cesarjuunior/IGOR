@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:igor/objetos/aventuraDTO.dart';
-import 'package:igor/objetos/usuatioDTO.dart';
 
 final CollectionReference avenCollection = Firestore.instance.collection('aventura');
 

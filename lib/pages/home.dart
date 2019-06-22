@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:igor/objetos/notice.dart';
 import 'package:igor/pages/criar.aventura.dart';
 import 'package:igor/repository/newsApi.dart';
-
+import 'package:igor/pages/Infos.dart';
 import 'cadastro.pessoa.dart';
 
 class HomePage extends StatefulWidget {
@@ -75,7 +75,12 @@ class _HomePageState extends State<HomePage> {
                   title: Text('Livros',
                     style: TextStyle(color: Colors.yellow, fontFamily: 'Fira Sans',),
                   ),
-                  onLongPress: (){
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => InfosPage()),
+                    );
                   },
                 ),
                 ListTile(
@@ -162,6 +167,7 @@ class _HomePageState extends State<HomePage> {
       result.forEach((item) {
 
         var notice = new Notice(
+            item['id'],
             item['url_img'],
             item['tittle'],
             item['date'],

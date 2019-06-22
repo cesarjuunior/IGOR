@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:igor/objetos/usuatioDTO.dart';
+import 'package:igor/objetos/usuarioDTO.dart';
 
 final CollectionReference usuCollection = Firestore.instance.collection('usuario');
 

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:igor/pages/aventura_andamento.dart';
 
 class Notice extends StatelessWidget{
 
+  var _id;
   var _img;
   var _title;
   var _date;
   var _description;
 
-  Notice(this._img,this._title,this._date,this._description);
+  Notice(this._id, this._img,this._title,this._date,this._description);
 
   BuildContext _context;
 
@@ -22,15 +24,19 @@ class Notice extends StatelessWidget{
         borderRadius: new BorderRadius.circular(6.0),
         elevation: 2.0,
         child: InkWell(
-          onTap: showDetail,
+          onTap: (){
+            print("APERTEI O BOTÃO PARA IR A OUTRA TELA");
+            print(_id);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AventuraAndamento()),
+            );
+          },
           child: _getListTile(),
         )
       ),
     );
-  }
-
-  showDetail() {
-    print("APERTEI O BOTÃO PARA IR A OUTRA TELA");
   }
 
   Widget _getListTile(){

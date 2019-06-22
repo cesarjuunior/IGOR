@@ -16,6 +16,7 @@ class _HomePageState extends State<HomePage> {
   var repository = new NewsApi();
 
   @override
+  bool visBotoesPer = false;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -79,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => InfosPage()),
+                          builder: (context) => InfosPage(visBotoesPer)),
                     );
                   },
                 ),

@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:igor/pages/Menu_Personagens.dart';
 
 class InfosPage extends StatefulWidget {
+  bool visBotoes;
+  InfosPage(this.visBotoes);
   @override
-  _InfosPageState createState() => _InfosPageState();
+  _InfosPageState createState() => _InfosPageState(this.visBotoes);
 }
 
 class _InfosPageState extends State<InfosPage> {
   @override
+
+  bool b;
+  _InfosPageState(this.b);
   Widget build(BuildContext context) {
     return Scaffold(
       body: Builder(
@@ -80,7 +85,7 @@ class _InfosPageState extends State<InfosPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => MenuPersonagemPage()),
+                                builder: (context) => MenuPersonagemPage(b)),
                           );
                         },
                       ),

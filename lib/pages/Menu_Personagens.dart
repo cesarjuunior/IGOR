@@ -8,11 +8,15 @@ import 'package:igor/pages/RusbePer.dart';
 
 class MenuPersonagemPage extends StatefulWidget {
   @override
-  _MenuPersonagemPageState createState() => _MenuPersonagemPageState();
+  bool a;
+  MenuPersonagemPage(this.a);
+  _MenuPersonagemPageState createState() => _MenuPersonagemPageState(a);
 }
 
 class _MenuPersonagemPageState extends State<MenuPersonagemPage> {
   @override
+  bool b;
+  _MenuPersonagemPageState(this.b);
   Widget build(BuildContext context) {
     return Scaffold(
       body: Builder(
@@ -71,7 +75,7 @@ class _MenuPersonagemPageState extends State<MenuPersonagemPage> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => GokuPage()),
+                                              builder: (context) => GokuPage(b)),
                                         );
                                       },
                                     ),
@@ -92,7 +96,7 @@ class _MenuPersonagemPageState extends State<MenuPersonagemPage> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => PikachuPage()),
+                                              builder: (context) => PikachuPage(b)),
                                         );
                                       },
                                     ),
@@ -113,7 +117,7 @@ class _MenuPersonagemPageState extends State<MenuPersonagemPage> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => ThanosPage()),
+                                              builder: (context) => ThanosPage(b)),
                                         );
                                       },
                                     ),
@@ -139,7 +143,7 @@ class _MenuPersonagemPageState extends State<MenuPersonagemPage> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => RusbePage()),
+                                              builder: (context) => RusbePage(b)),
                                         );
                                       },
                                     ),
@@ -160,7 +164,7 @@ class _MenuPersonagemPageState extends State<MenuPersonagemPage> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => RonaldinhoPage()),
+                                              builder: (context) => RonaldinhoPage(b)),
                                         );
                                       },
                                     ),
@@ -181,7 +185,7 @@ class _MenuPersonagemPageState extends State<MenuPersonagemPage> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => GretchenPage()),
+                                              builder: (context) => GretchenPage(b)),
                                         );
                                       },
                                     ),

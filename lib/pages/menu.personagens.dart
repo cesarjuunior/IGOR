@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:igor/pages/GretchenPer.dart';
-import 'package:igor/pages/GokuPer.dart';
-import 'package:igor/pages/ThanosPer.dart';
-import 'package:igor/pages/PikachuPer.dart';
-import 'package:igor/pages/RonaldinhoPer.dart';
-import 'package:igor/pages/RusbePer.dart';
+import 'package:igor/personagens/GretchenPer.dart';
+import 'package:igor/personagens/GokuPer.dart';
+import 'package:igor/personagens/ThanosPer.dart';
+import 'package:igor/personagens/PikachuPer.dart';
+import 'package:igor/personagens/RonaldinhoPer.dart';
+import 'package:igor/personagens/RusbePer.dart';
 
 class MenuPersonagemPage extends StatefulWidget {
   @override

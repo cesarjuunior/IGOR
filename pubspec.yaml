@@ -62,6 +62,7 @@ flutter:
     - lib/images/fundo_nova_aventura.png
     - lib/images/botao_fechar.png
     - lib/images/botao_adicionar_sessao.png
+    - lib/images/botao_adicionar_jogadores.png
     - lib/images/miniatura_coast.png
     - lib/images/miniatura_corvali.png
     - lib/images/miniatura_heartlands.png

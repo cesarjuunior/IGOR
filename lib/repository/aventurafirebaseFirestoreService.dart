@@ -10,11 +10,11 @@ class AventuraFirebaseFirestoreService{
 
   AventuraFirebaseFirestoreService.internal();
 
-  Future<Aventura> inserirAventura(String descricaoAventura) async {
+  Future<Aventura> inserirAventura(String descricaoAventura, String imagemTema) async {
     final TransactionHandler createTransaction = (Transaction tx) async {
       final DocumentSnapshot ds = await tx.get(avenCollection.document());
 
-      final Aventura usu = new Aventura(descricaoAventura);
+      final Aventura usu = new Aventura(descricaoAventura, imagemTema);
       final Map<String, dynamic> data = usu.toMap();
 
 
@@ -29,5 +29,20 @@ class AventuraFirebaseFirestoreService{
       print('error: $error');
       return null;
     });
+  }
+
+
+  Stream<QuerySnapshot> getNoteList({int offset, int limit}) {
+    Stream<QuerySnapshot> snapshots = avenCollection.snapshots();
+
+    if (offset != null) {
+      snapshots = snapshots.skip(offset);
+    }
+
+    if (limit != null) {
+      snapshots = snapshots.take(limit);
+    }
+
+    return snapshots;
   }
 }

@@ -1,23 +1,28 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:igor/objetos/aventuraDTO.dart';
-import 'package:igor/pages/home.dart';
+import 'package:igor/objetos/sessaoDTO.dart';
 import 'package:igor/repository/aventurafirebaseFirestoreService.dart';
 
-class _criarAventuraState extends State<criarAventura> {
+import 'home.dart';
 
-  TextEditingController _descricaoAventura;
+class CriarSessao extends StatefulWidget {
+  @override
+  _CriarSessaoState createState() => _CriarSessaoState();
+}
+
+class _CriarSessaoState extends State<CriarSessao> {
+  TextEditingController _descricaoSessao;
 
   AventuraFirebaseFirestoreService db = new AventuraFirebaseFirestoreService();
+
 
   @override
   void initState() {
     super.initState();
 
-    _descricaoAventura = new TextEditingController();
+    _descricaoSessao = new TextEditingController();
 
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -142,35 +147,37 @@ class _criarAventuraState extends State<criarAventura> {
 
   _body() {
     return Center(
-      child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Divider(height: 20, color: Colors.transparent),
-            Padding(
-              padding: EdgeInsets.only(left: 25, right: 25),
-              child: Material(
-                borderRadius: const BorderRadius.all(const Radius.circular(10.0)),
-                child: Container(
-                  padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[_botaoFechar()],
-                      ),
-                      TextFormField(
-                        controller: _descricaoAventura,
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(color: Colors.black, fontSize: 15),
-                        decoration: InputDecoration(
-                          labelText: "Dê um nome para sua aventura",
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Divider(height: 20, color: Colors.transparent),
+              Padding(
+                padding: EdgeInsets.only(left: 25, right: 25),
+                child: Material(
+                  borderRadius: const BorderRadius.all(
+                      const Radius.circular(10.0)),
+                  child: Container(
+                    padding: EdgeInsets.only(
+                        left: 10, right: 10, top: 10, bottom: 10),
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[_botaoFechar()],
                         ),
-                      ),
-                      Divider(height: 10, color: Colors.transparent),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          GestureDetector(
+                        TextFormField(
+                          controller: _descricaoSessao,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(color: Colors.black, fontSize: 15),
+                          decoration: InputDecoration(
+                            labelText: "Dê um nome à próxima sessao",
+                          ),
+                        ),
+                        Divider(height: 10, color: Colors.transparent),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            GestureDetector(
                               child: Container(
                                   width: 80,
                                   height: 20,
@@ -183,51 +190,27 @@ class _criarAventuraState extends State<criarAventura> {
                                     ),
                                   )
                               ), onTap: () => inserirAventura(),
-                          )
-                        ],
-                      ),
-                      Divider(height: 500, color: Colors.transparent),
-                    ],
+                            )
+                          ],
+                        ),
+                        Divider(height: 500, color: Colors.transparent),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-      )
+            ],
+          ),
+        )
     );
   }
 
-  // ignore: missing_return
-  Future<Aventura> inserirAventura() async{
-    String imagemTema = escolherImagem();
-    db.inserirAventura(_descricaoAventura.text, imagemTema);
-    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+// ignore: missing_return
+  Future<Sessao> inserirAventura() async {
+    db.inserirAventura(_descricaoSessao.text, null);
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => HomePage()));
   }
-
-
-  String escolherImagem() {
-
-    var rng = new Random();
-    int n = rng.nextInt(4);
-
-    if(n == 0){
-      return "lib/images/miniatura_coast.png";
-    }else if(n == 1){
-      return "lib/images/miniatura_corvali.png";
-    }else if(n == 2){
-      return "lib/images/miniatura_heartlands.png";
-    }else if(n == 3){
-      return "lib/images/miniatura_imagem_automática.png";
-    }else if(n == 4){
-      return "lib/images/miniatura_krevast.png";
-    }
-  }
-}
-
-class criarAventura extends StatefulWidget {
-  @override
-  _criarAventuraState createState() => _criarAventuraState();
 }
 
 class _botaoFechar extends StatelessWidget {

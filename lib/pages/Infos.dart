@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:igor/pages/Menu_Personagens.dart';
+import 'package:igor/pages/menu.personagens.dart';
 
 class InfosPage extends StatefulWidget {
   bool visBotoes;

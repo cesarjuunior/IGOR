@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:igor/pages/cadastro.pessoa.dart';
 import 'package:igor/pages/home.dart';
+import 'package:igor/repository/usuariofirebaseFirestoreService.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -8,6 +9,20 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  TextEditingController _email;
+  TextEditingController _senha;
+
+  UsuarioFirebaseFirestoreService db = new UsuarioFirebaseFirestoreService();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _email = new TextEditingController();
+    _senha = new TextEditingController();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   children: <Widget>[
                     TextFormField(
+                      controller: _email,
                       keyboardType: TextInputType.text,
                       style: new TextStyle(color: Colors.white, fontSize: 15),
                       decoration: InputDecoration(
@@ -71,6 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Divider(color: Colors.transparent),
                     TextFormField(
+                      controller: _senha,
                       obscureText: true,
                       keyboardType: TextInputType.text,
                       style: new TextStyle(color: Colors.white, fontSize: 15),
@@ -107,7 +124,20 @@ class _LoginPageState extends State<LoginPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        new _botaoEntrar()
+                        GestureDetector(
+                            child: Container(
+                                width: 90,
+                                height: 30,
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          "lib/images/botao_entrar.png"),
+                                      fit: BoxFit.cover
+                                  ),
+                                )
+                            ), onTap: () => validarDadosEntrada(_email, _senha)
+                        )
                       ],
                     ),
                   ],
@@ -157,38 +187,9 @@ class _LoginPageState extends State<LoginPage> {
         )
     );
   }
-}
 
-class _botaoEntrar extends StatelessWidget {
-  const _botaoEntrar({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-        child: Container(
-            width: 90,
-            height: 30,
-            decoration: BoxDecoration(
-              color: Colors.black,
-              image: DecorationImage(
-                  image: AssetImage("lib/images/botao_entrar.png"),
-                  fit: BoxFit.cover
-              ),
-            )
-        ), onTap: () {
-      print(
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => HomePage()
-            ),
-          )
-      );
-    }
-    );
+  validarDadosEntrada(TextEditingController email, TextEditingController senha){
+     db.recuperarUsuario(email.text, senha.text, context);
   }
 }
-
 

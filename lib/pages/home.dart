@@ -1,8 +1,15 @@
+import 'dart:async';
+import 'dart:math';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:igor/objetos/notice.dart';
+import 'package:igor/objetos/aventuraDTO.dart';
+import 'package:igor/pages/aventura.andamento.dart';
 import 'package:igor/pages/criar.aventura.dart';
-import 'package:igor/repository/newsApi.dart';
+import 'package:igor/repository/aventurafirebaseFirestoreService.dart';
 import 'package:igor/pages/Infos.dart';
+import 'package:igor/pages/dice.dart';
+
 import 'cadastro.pessoa.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,11 +19,39 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  List _news = new List();
-  var repository = new NewsApi();
+  List<Aventura> items;
+  AventuraFirebaseFirestoreService db = new AventuraFirebaseFirestoreService();
+
+  StreamSubscription<QuerySnapshot> aventuras;
+
+  bool visBotoesPer = false;
 
   @override
-  bool visBotoesPer = false;
+  void initState() {
+
+    super.initState();
+
+    items = new List();
+
+    aventuras?.cancel();
+
+    aventuras = db.getNoteList().listen((QuerySnapshot snapshot) {
+      final List<Aventura> notes = snapshot.documents
+          .map((documentSnapshot) => Aventura.fromMap(documentSnapshot.data))
+          .toList();
+      setState(() {
+        this.items = notes;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    aventuras?.cancel();
+    super.dispose();
+  }
+
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -145,57 +180,62 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Container(
         decoration: BoxDecoration(
-            color: Color(0xff221233),
+          color: Color(0xff221233),
         ),
-        child: _getListViewWidget(),
+          child: Center(
+            child: ListView.builder(
+              itemCount: items.length,
+              //padding: const EdgeInsets.all(2.0),
+              itemBuilder: (context, position) {
+                return Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(
+                            '${items[position].imagemTema}'
+                        ),
+                        fit: BoxFit.cover
+                    ),
+                  ),
+                    child: Column(
+                    children: <Widget>[
+                      Divider(height: 20.0, color: Colors.transparent),
+                      ListTile(
+                          title: Text(
+                            '${items[position].descricaoAventura}',
+                            style: TextStyle(
+                              fontSize: 22.0,
+                              fontFamily: 'Fira Sans',
+                              color: Colors.white,
+                            ),
+                          ),
+                          /*                    leading: Column(
+                        children: <Widget>[
+                          Padding(padding: EdgeInsets.all(3.0)),
+                          IconButton(
+                              icon: const Icon(Icons.remove_circle_outline),
+                          //    onPressed: () => _deleteNote(context, items[position], position)
+                          ),
+                        ],
+                      ),*/
+                          onTap: () =>
+                              _navigateToAventure(context, items[position])
+
+                      ),
+                      Divider(height: 20.0, color: Colors.transparent),
+                    ],
+                  ),
+                );
+              }),
+        ),
       ),
     );
   }
 
-  @override
-  void initState() {
-
-    loadNotices();
-
-  }
-
-  loadNotices() async{
-
-    List result = await repository.loadNews();
-
-    setState(() {
-
-      result.forEach((item) {
-
-        var notice = new Notice(
-            item['id'],
-            item['url_img'],
-            item['tittle'],
-            item['date'],
-            item['description']
-        );
-
-
-        _news.add(notice);
-
-      });
-
-    });
-
-  }
-
-
-
-   _getListViewWidget(){
-     var list = new ListView.builder(
-         itemCount: _news.length,
-         padding: new EdgeInsets.only(top: 5.0),
-         itemBuilder: (context, index){
-           return _news[index];
-         }
-     );
-
-     return list;
+  void _navigateToAventure(BuildContext context, Aventura aventura) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AventuraAndamento(aventura)),
+    );
   }
 
   void _select(Choice choice) {
@@ -216,6 +256,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 }
+
 
 
 class Choice {

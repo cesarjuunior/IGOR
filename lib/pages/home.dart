@@ -8,6 +8,8 @@ import 'package:igor/pages/aventura.andamento.dart';
 import 'package:igor/pages/criar.aventura.dart';
 import 'package:igor/repository/aventurafirebaseFirestoreService.dart';
 import 'package:igor/pages/Infos.dart';
+import 'package:igor/pages/dice.dart';
+
 import 'cadastro.pessoa.dart';
 
 class HomePage extends StatefulWidget {

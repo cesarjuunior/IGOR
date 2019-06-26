@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:igor/objetos/sessaoDTO.dart';
+import 'package:igor/pages/batalha.dart';
 import 'package:igor/repository/aventurafirebaseFirestoreService.dart';
 
 import 'home.dart';
@@ -209,7 +210,7 @@ class _CriarSessaoState extends State<CriarSessao> {
   Future<Sessao> inserirAventura() async {
     db.inserirAventura(_descricaoSessao.text, null);
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => HomePage()));
+        context, MaterialPageRoute(builder: (context) => Batalha()));
   }
 }
 

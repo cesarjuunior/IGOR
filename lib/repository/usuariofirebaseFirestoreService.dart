@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:igor/objetos/usuarioDTO.dart';
 import 'package:igor/pages/home.dart';
+import 'package:igor/pages/login.page.dart';
 
 final CollectionReference usuCollection = Firestore.instance.collection('usuario');
 final CollectionReference aventuraCollection = Firestore.instance.collection('aventura');
@@ -16,12 +17,13 @@ class UsuarioFirebaseFirestoreService{
 
   QuerySnapshot usuarios;
 
-  Future<void> inserirUsuario(String email, String nome, String dtnasci, String senha, String sexo) async {
+  Future<void> inserirUsuario(String email, String nome, String dtnasci, String senha, String sexo, BuildContext context) async {
 
       final Usuario usu = new Usuario(nome, email, senha, dtnasci, sexo);
       final Map<String, dynamic> data = usu.toMap();
 
       usuCollection.add(data);
+      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
   }
 
   recuperarUsuario(String email, String senha, BuildContext context ) async {

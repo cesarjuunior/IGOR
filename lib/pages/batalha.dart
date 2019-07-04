@@ -11,6 +11,9 @@ class _BatalhaState extends State<Batalha> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        color: Color(0xff221233),
+      ),
       child: Center(
         child: Stack(
           children: <Widget>[

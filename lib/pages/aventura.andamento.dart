@@ -1,7 +1,13 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:igor/objetos/aventuraDTO.dart';
+import 'package:igor/objetos/sessaoDTO.dart';
 import 'package:igor/pages/criar.sessao.dart';
+import 'package:igor/pages/sessoes.dart';
+import 'package:igor/repository/sessarfirebaseFirestoreService.dart';
 import 'package:igor/utils/painter.dart';
 
 import 'home.dart';
@@ -15,7 +21,7 @@ class AventuraAndamento extends StatefulWidget {
   _AventuraAndamentoState createState() => _AventuraAndamentoState();
 }
 
-class _AventuraAndamentoState extends State<AventuraAndamento> with SingleTickerProviderStateMixin {
+class _AventuraAndamentoState extends State<AventuraAndamento>{
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -41,10 +47,39 @@ class _AventuraAndamentoState extends State<AventuraAndamento> with SingleTicker
   Color left = Colors.black;
   Color right = Colors.white;
 
+  List<Sessao> items;
+  SessaoFirebaseFirestoreService db = new SessaoFirebaseFirestoreService();
+  StreamSubscription<QuerySnapshot> sessoes;
+
+
+
   String floatBotton = 'lib/images/botao_adicionar_sessao.png';
   int condicaoBotao = 1;
 
+  @override
+  void initState() {
+    super.initState();
+    items = new List();
 
+
+    sessoes = db.getSessoesList().listen((QuerySnapshot snapshot) {
+      final List<Sessao> notes = snapshot.documents
+          .map((documentSnapshot) => Sessao.fromMap(documentSnapshot.data))
+          .toList();
+      setState(() {
+        this.items = notes;
+      });
+    });
+
+    _descricao = new TextEditingController(text: widget.aventura.descricaoAventura);
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
+    _pageController = PageController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +110,6 @@ class _AventuraAndamentoState extends State<AventuraAndamento> with SingleTicker
         },
         child: SingleChildScrollView(
           child: Container(
-            width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height >= 775.0 ? 775.0 : 775.0,
             decoration: new BoxDecoration(
               color: Color(0xff221233)
@@ -129,22 +163,9 @@ class _AventuraAndamentoState extends State<AventuraAndamento> with SingleTicker
     myFocusNodeEmail.dispose();
     myFocusNodeName.dispose();
     _pageController?.dispose();
+
+    sessoes?.cancel();
     super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    _descricao = new TextEditingController(text: widget.aventura.descricaoAventura);
-
-
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-
-    _pageController = PageController();
   }
 
   void showInSnackBar(String value) {
@@ -239,7 +260,51 @@ class _AventuraAndamentoState extends State<AventuraAndamento> with SingleTicker
                               color: Colors.black,
                               fontSize: 20),
                         ),
-                  ),
+
+                      ),
+                      Divider(height: 30),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          RaisedButton(
+                            color: Colors.teal,
+                            onPressed: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Sessoes()));
+                            },
+                            child: Text('Lista de Sessões'),
+                          ),
+                        ],
+                      ),
+//                      Column(
+//                        children: <Widget>[
+//                          ListView.builder(
+//                              //itemCount: items.length,
+//                              itemBuilder: (context, position) {
+//                                return Container(
+//                                  decoration: BoxDecoration(
+//                                    color: Colors.grey,
+//                                  ),
+//                                  child: Column(
+//                                    children: <Widget>[
+//                                      ListTile(
+//                                        title: Text(
+//                                          '${items[position].descricaoSessao}',
+//                                          style: TextStyle(
+//                                            fontSize: 22.0,
+//                                            fontFamily: 'Fira Sans',
+//                                            color: Colors.white,
+//                                          ),
+//                                        ),
+////                                          onTap: () =>
+////                                              _navigateToAventure(context, items[position])
+//                                      )
+//                                    ],
+//                                  ),
+//                                );
+//                              }
+//                          ),
+//                        ],
+//                      ),
                     ],
                   ),
                 ),

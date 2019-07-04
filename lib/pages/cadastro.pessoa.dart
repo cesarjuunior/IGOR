@@ -91,7 +91,7 @@ class _cadastroPessoaState extends State<cadastroPessoa> {
                                           fit: BoxFit.cover
                                       ),
                                     )
-                                ), onTap: () => db.inserirUsuario(_email.text, _nome.text, _dataNascimento.text, _senha.text, _sexo.text)
+                                ), onTap: () => db.inserirUsuario(_email.text, _nome.text, _dataNascimento.text, _senha.text, _sexo.text, context)
                             )
                           ],
                         ),

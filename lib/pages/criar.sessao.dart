@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:igor/objetos/sessaoDTO.dart';
 import 'package:igor/pages/batalha.dart';
+import 'package:igor/pages/dice.dart';
 import 'package:igor/repository/aventurafirebaseFirestoreService.dart';
+import 'package:igor/repository/sessarfirebaseFirestoreService.dart';
+import 'package:intl/intl.dart';
 
 import 'home.dart';
 
@@ -13,8 +16,9 @@ class CriarSessao extends StatefulWidget {
 class _CriarSessaoState extends State<CriarSessao> {
   TextEditingController _descricaoSessao;
 
-  AventuraFirebaseFirestoreService db = new AventuraFirebaseFirestoreService();
+  SessaoFirebaseFirestoreService db = new SessaoFirebaseFirestoreService();
 
+  String _value = '';
 
   @override
   void initState() {
@@ -174,14 +178,29 @@ class _CriarSessaoState extends State<CriarSessao> {
                             labelText: "Dê um nome à próxima sessao",
                           ),
                         ),
-                        Divider(height: 10, color: Colors.transparent),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          RaisedButton(
+                            color: Colors.teal,
+                            onPressed: _selectDate, child: new Text('Selecione a data'),
+                          ),
+                          Text("               "),
+                          Text(_value, style: TextStyle(
+                              fontFamily: 'Fira Sans',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              fontSize: 15)),
+                        ],
+                      ),
+                      Divider(height: 30, color: Colors.transparent),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             GestureDetector(
                               child: Container(
                                   width: 80,
-                                  height: 20,
+                                  height: 40,
                                   decoration: BoxDecoration(
                                     color: Colors.black,
                                     image: DecorationImage(
@@ -190,7 +209,7 @@ class _CriarSessaoState extends State<CriarSessao> {
                                         fit: BoxFit.cover
                                     ),
                                   )
-                              ), onTap: () => inserirAventura(),
+                              ), onTap: () => inserirSessao(),
                             )
                           ],
                         ),
@@ -207,10 +226,23 @@ class _CriarSessaoState extends State<CriarSessao> {
   }
 
 // ignore: missing_return
-  Future<Sessao> inserirAventura() async {
-    db.inserirAventura(_descricaoSessao.text, null);
+  Future<Sessao> inserirSessao() async {
+    db.inserirSessao(_descricaoSessao.text, _value);
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => Batalha()));
+        context, MaterialPageRoute(builder: (context) => dice()));
+  }
+
+  Future _selectDate() async {
+    DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: new DateTime.now(),
+        firstDate: new DateTime(2016),
+        lastDate: new DateTime(2101)
+    );
+    var mascara = new DateFormat('dd/MM');
+    String formatted = mascara.format(picked);
+
+    if(formatted != null) setState(() => _value = formatted);
   }
 }
 

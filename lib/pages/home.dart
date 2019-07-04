@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,6 @@ import 'package:igor/pages/aventura.andamento.dart';
 import 'package:igor/pages/criar.aventura.dart';
 import 'package:igor/repository/aventurafirebaseFirestoreService.dart';
 import 'package:igor/pages/Infos.dart';
-import 'package:igor/pages/dice.dart';
 
 import 'cadastro.pessoa.dart';
 
@@ -208,15 +206,6 @@ class _HomePageState extends State<HomePage> {
                               color: Colors.white,
                             ),
                           ),
-                          /*                    leading: Column(
-                        children: <Widget>[
-                          Padding(padding: EdgeInsets.all(3.0)),
-                          IconButton(
-                              icon: const Icon(Icons.remove_circle_outline),
-                          //    onPressed: () => _deleteNote(context, items[position], position)
-                          ),
-                        ],
-                      ),*/
                           onTap: () =>
                               _navigateToAventure(context, items[position])
 

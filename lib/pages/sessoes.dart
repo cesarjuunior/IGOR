@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:igor/objetos/sessaoDTO.dart';
 import 'package:igor/repository/sessarfirebaseFirestoreService.dart';
 
+import 'dice.dart';
+
 class Sessoes extends StatefulWidget {
   @override
   _SessoesState createState() => _SessoesState();
@@ -69,6 +71,7 @@ class _SessoesState extends State<Sessoes> {
                   height: 30,
                   fit: BoxFit.fill,
                 ),
+                onTap: () => Navigator.push( context, MaterialPageRoute(builder: (context) => dice()),),
                 title: Text('Aventuras',
                   style: TextStyle(color: Colors.yellow,fontFamily: 'Fira Sans',),
                 ),
@@ -157,6 +160,7 @@ class _SessoesState extends State<Sessoes> {
                               color: Colors.white,
                             ),
                           ),
+                        onTap:() => Navigator.push(context, MaterialPageRoute(builder: (context) => dice())),
                       ),
 
                       Divider(height: 20.0, color: Colors.transparent),
